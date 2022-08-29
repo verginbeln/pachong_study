@@ -1,4 +1,4 @@
-import requests                   #百度翻译搜索
+import requests                   #百度翻译搜索   sug
                                   # post 方式，不能像get那样直接放url里
                 
 url = "https://fanyi.baidu.com/sug"
