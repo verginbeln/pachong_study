@@ -26,7 +26,7 @@ print(s.group())
 
 #match 只从开头进行匹配，匹配不到就是空，没有匹配
 a = re.match(r"\d+", "我的电话号码是:10086, 他的电话号是:10010")
-print(a.group()) 
+print(a.group())
 #结果：
 #AttributeError: 'NoneType' object has no attribute 'group'
 #说明.前面的东西是空，即a是空的，说明没有匹配到内容
@@ -44,14 +44,18 @@ print(ret)  #方便一点
 
 
 #(?P<分组名字>正则)  可以单独从正则匹配的内容中进一步提取内容
-
 c = """
 <div class='jay'><span id='1'>周杰伦</span></div>
-<div class='wu'><span id='1'>吴</span></div>
-<div class='li'><span id='1'>李</span></div>
-<div class='zhang'><span id='1'>张</span></div>
+<div class='wu'><span id='2'>吴</span></div>
+<div class='li'><span id='3'>李</span></div>
+<div class='zhang'><span id='4'>张</span></div>
 """
 
-obj = re.compile("<div class='.*?><span id='1'>.*?</span></div>", re.S)  #re.S 让.能匹配换行符
+obj = re.compile("<div class='(?P<nicheng>.*?)<span id='(?P<id>.*?)'>(?P<name>.*?)</span></div>", re.S)  #re.S 让.能匹配换行符
 
+result = obj.finditer(c)             #注意加括号()
+for i in result:
+    print(i.group())
+    print(i.group("id"))
+    print(i.group("name"))
 
