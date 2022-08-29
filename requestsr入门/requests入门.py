@@ -1,7 +1,7 @@
 #安装requests
 # pip install requests
 #pip 清华源
-
+# 百度搜索周杰伦    get方式
 import requests
 url = "https://www.baidu.com/s?wd=%E5%91%A8%E6%9D%B0%E4%BC%A6"
 
