@@ -1,7 +1,7 @@
 import re
 
 #findall : 匹配字符串中所有的符合正则的内容，返回的是list
-lst = re.findall(r"\d+", "我的电话号码是:10086, 他的电话号是:10010")   #正则\d+前面加r有很多好处，可以加上；r表示字符串为原生字符串，不进行转义
+lst = re.findall(r"\d+", "我的电话号码是:10086, 他的电话号是:10010")   #正则\d+前面加r有很多好处，可以加上； r表示字符串为原生字符串，不进行转义
 print(lst)
 
 
@@ -51,7 +51,7 @@ c = """
 <div class='zhang'><span id='4'>张</span></div>
 """
 
-obj = re.compile("<div class='(?P<nicheng>.*?)<span id='(?P<id>.*?)'>(?P<name>.*?)</span></div>", re.S)  #re.S 让.能匹配换行符
+obj = re.compile("<div class='(?P<nicheng>.*?)<span id='(?P<id>.*?)'>(?P<name>.*?)</span></div>", re.S)      #re.S 让.能匹配换行符
 
 result = obj.finditer(c)             #注意加括号()
 for i in result:
