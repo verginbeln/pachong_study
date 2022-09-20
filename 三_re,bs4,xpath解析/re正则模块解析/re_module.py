@@ -59,3 +59,7 @@ for i in result:
     print(i.group("id"))
     print(i.group("name"))
 
+
+#替换:::
+a = re.sub(r"\d+","__", "我的电话号码是:10086, 他的电话号是:10010")
+
