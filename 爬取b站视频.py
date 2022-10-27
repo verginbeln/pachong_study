@@ -1,12 +1,9 @@
-import pprint
-
 import requests
 from tqdm import tqdm
 import re
 import os
-import moviepy
-from moviepy.editor import *
-import pprint
+from moviepy.audio.io.AudioFileClip import AudioFileClip
+from moviepy.video.io.VideoFileClip import VideoFileClip
 import json
 
 def get_parse():
@@ -35,16 +32,19 @@ def json_get_data(data):
     title = obj2.findall(data)[0]
     print(title)
     json_data = json.loads(result)
-    pprint.pprint(json_data)
+    # pprint.pprint(json_data)
     video_url = json_data['data']['dash']['video'][0]['backupUrl'][0]
-    print('解析到的音频地址:',video_url)
+    print('解析到的音频地址是:',video_url)
     audio_url = json_data['data']['dash']['audio'][0]['backupUrl'][0]
-    print('解析到的视频地址:',audio_url)
+    print('解析到的视频地址是:',audio_url)
     ####
+    print("开始下载视频和音频,这个挺快的")
     video_data = [title, audio_url, video_url]
     # download(title, video_url, audio_url)
     download_style(video_url, f"{title}.mp4")
     download_style(audio_url, f"{title}.mp3")
+    print("合并会比较慢,等一等吧,开机干点别的事")
+    Splicing(title)
 ############################################
 def download(title, video_url ,audio_url):
     video = requests.get(video_url, headers=headers).content
@@ -89,11 +89,11 @@ def download_style(url: str, fname: str):
             bar.update(size)
 
 if __name__ == '__main__':
-    url = "https://www.bilibili.com/video/BV1yf4y1p7UA/?spm_id_from=333.788.recommend_more_video.-1&vd_source=c0b84e730bfbe43e07c8220e9ea5ad05"
+    url = input("请输入b站网址,地址栏复制一下")  #"https://www.bilibili.com/video/BV1yf4y1p7UA/?spm_id_from=333.788.recommend_more_video.-1&vd_source=c0b84e730bfbe43e07c8220e9ea5ad05"
     headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36",
             "referer": url
     }
     get_parse()
 
-    print("over")
+    print("合并好了,视频下载成功")
